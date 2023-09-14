@@ -1,42 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.9.55/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <title>Document</title>
-</head>
-<body style="background-color: gray">
-    <header>
-        <nav class="navbar bg-dark">
-            <div class="container-fluid">
-                <div>
-                    <a class="navbar-brand text-white bold" href="{{route('index')}}">GesCar</a>
-                </div>
-                <form class="d-flex">
-                    
-                    <a href="" class="btn btn-danger me-3">Deconnexion</a>
-                </form>
-            </div>
+@extends("layout.master")
 
-        </nav>
-    </header>
-    <div class="container text-center mt-4">
-        <div>
-            <button class="btn btn-dark">Gestion des voitures</button>
-            <button class="btn btn-dark me-3 ms-3">Gestion des locations</button>
-            <button class="btn btn-dark">Ajouter un client</button>
-        </div>
-        <h3 class="text-white mt-2">Liste des clients</h3>
-    </div>
-    <div class="me-3 ms-3">
+@section("title", "ClientList")
+
+@section("buttons")
+@include("includes.headbuttons")
+@endsection
+
+@section("fieldtitle", "Liste des clients")
+
+@section("content")
+@if (session('message'))
+<div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+    <strong>Message !</strong> <br> {{ session("message") }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+@if (session('deletemsg'))
+<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+    <strong>Message !</strong> <br> {{ session("deletemsg") }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+@if (session('updatemsg'))
+<div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+    <strong>Message !</strong> <br> {{ session("updatemsg") }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
         <table class="table table-hover">
+            <thead>
+                <tr>
+                  <th>Photo</th>
+                  <th>Nom et prénoms</th>
+                  <th>Téléphone</th>
+                  <th>Adresse</th>
+                  <th>Email</th>
+                  <th>CNI</th>
+                  <th>Actions</th>
+                </tr>
+            </thead>
+            @if (isset($classlist))
+            <tbody>
+                @foreach ($classlist as $item)
+                <tr>
+                    <td>
+                        <div style="width: 3rem; height: 3rem;">
+                            <img src="{{ asset($item["photo"]) }}" width="100%" height="100%" style="object-fit: cover" alt="">
+                        </div>
+                    </td>
+                    <td>{{ $item->nom }} {{ $item->prenom }}</td>
+                    <td>{{ $item->tel }}</td>
+                    <td>{{ $item->address }}</td>
+                    <td>{{ $item->email }}</td>
+                    <td>{{ $item->cni }}</td>
+                    <td>
+                      <div>
+                        <button data-bs-toggle="modal" data-bs-target="#exempleModal.{{ $item->id }}" type="button" class="btn btn-sm btn-warning">Voir plus</button>
+                        <a href="{{ route("editClient", ["id"=>$item->id]) }}" type="button" class="btn btn-sm btn-outline-dark ms-2 me-2">Modifier</a>
+                        <a href="{{ route("deleteClient", ["id"=>$item->id]) }}" type="button" class="btn btn-sm btn-outline-danger">Supprimer</a> 
+                      </div>
+                  </td>
+                </tr>
+                <div class="modal" id="exempleModal.{{ $item->id }}" tabindex="-1" aria-labelledby="exempleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="card box-shadow">
+                                <div style="height: 20rem">
+                                    <img src="{{ asset("$item->photo") }}" alt="" width="100%" height="100%" style="object-fit:cover;" class="card-img-top">
+                                </div>
+                                <div class="card-body">
+                                    <div class="card-text">
+                                        <h2 class="mb-3 text-muted">{{ $item->nom }} {{ $item->prenom }}</h2>
+                                        <p class="text-muted">Contact : {{ $item->tel }}</p>
+                                        <p class="text-muted">Adresse : {{ $item->address }}</p>
+                                        <p class="text-muted">Email : {{ $item->email }}</p>
+                                        <p class="text-muted">CNI : {{ $item->cni }}</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <a href="" class="btn btn-sm btn-outline-secondary">Précedent</a>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Suivant</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </tbody>
+            @endif
+        </table>
+        {{-- <table class="table table-hover">
             <thead>
                 <tr>
                   <th>Photo</th>
@@ -95,23 +148,5 @@
                   </td>
                 </tr>
             </tbody>
-        </table>
-    </div>
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
-<script>
-    $(document).ready(function(){
-        $('[data-toggle="tooltip"]').tooltip();
-    });
-
-    $( '#multiple-select-field' ).select2( {
-        theme: "bootstrap-5",
-        width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
-        placeholder: $( this ).data( 'placeholder' ),
-        closeOnSelect: false,  
-    } );
-</script>
-</body>
-</html>
+        </table> --}}
+@endsection

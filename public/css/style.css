@@ -1,0 +1,32 @@
+.car_field{
+    padding: .5rem;
+    display: flex;
+    gap: 1rem;
+    width: 35rem;
+    background-color: rgb(120, 120, 120);
+}
+
+.car_field_right_text{
+    display: flex;
+    margin: 0;
+    gap: 1rem;
+    line-height: 32px;
+    text-align: justify;
+    text-transform: uppercase;
+    color: rgb(223, 223, 223);
+}
+
+.car_field_img{
+    height: 10rem;
+    width: 10rem;
+    overflow: hidden;
+}
+
+.car_field_img img{
+    height: 100%;
+    object-fit: cover;
+}
+
+.car_field_right_text_left_item{
+    display: flex;
+}
