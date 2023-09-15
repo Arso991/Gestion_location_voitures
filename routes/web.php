@@ -1,10 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\UtilisateurController;
-
+use App\Http\Controllers\CarController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +14,47 @@ use App\Http\Controllers\UtilisateurController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/',[ClientController::class, "index"])->name("index");
+
+
+
+// Route pour afficher le formulaire d'inscription
+Route::get('/register',[UtilisateurController::class, "register"])->name("register");
+
+
+// Route pour traiter le formulaire d'inscription
+Route::post('/traitementRegister',[UtilisateurController::class, "traitementRegister"])->name("traitementRegister");
+
+//Route pour la deconnexion 
+Route::post('/logout', [UtilisateurController::class,'logout'])->name('logout');
+
+
+// Route pour afficher le formulaire de connexion
+Route::get('/login',[UtilisateurController::class, "login"])->name("login");
+
+
+
+// Route pour traiter le formulaire de connexion
+Route::post('/traitementLogin',[UtilisateurController::class, "traitementLogin"])->name("traitementLogin");
+
+Route::get('.verify_email/{email}', [UtilisateurController::class,"verify"])->name('verifyEmail');
+
+Route::get('/email_forgot',[UtilisateurController::class,"emailForgot"])->name('emailForgot');
+Route::post('/emailVerify',[UtilisateurController::class,"emailVerify"])->name('emailVerify');
+Route::get('/email_change',[UtilisateurController::class,"emailChange"])->name('emailChange');
+Route::match(['get','post'], '/modif_pass',[UtilisateurController::class,"change_password"])->name('modif_pass');
+
+
+//Router pour afficher la gestion des voitures 
+
+Route::get('/GestionVoiture',[UtilisateurController::class, "GestionVoiture"])->name("GestionVoiture");
+
+// router pour afficher ajoute de voiture
+
+
+Route::get('/cars/create', [CarController::class, 'create'])->name('cars.create');
+Route::post('/cars', [CarController::class, 'store'])->name('cars.store');
 
 Route::controller(ClientController::class)->group(function(){
     Route::get("/", "index")->name("index");
