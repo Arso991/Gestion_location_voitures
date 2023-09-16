@@ -78,4 +78,9 @@ Route::controller(CarController::class)->group(function(){
     Route::post("addmodel", "model")->name("addModel");
     Route::get("trashmodel/{id}", "deletemodel")->name("trashModel");
     Route::post("editmodel/{id}", "editemodel")->name("editeModel");
+
+    Route::get("addcar", "addcar")->name("addCar");
+    Route::post("savecar", "savecar")->name("savecar");
+    Route::get("trashcar/{id}", "deletecar")->name("trashCar");
+    Route::post("editcar/{id}", "editecar")->name("editeCar");
 });

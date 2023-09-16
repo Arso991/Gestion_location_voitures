@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\Car;
 use App\Models\Car_category;
 use App\Models\Modele;
 use Illuminate\Http\Request;
@@ -11,7 +12,8 @@ class CarController extends Controller
 {
 //methode pour afficher la vue de la liste des voitures
     public function showcarlist(){
-        return view("carlist");
+        $car = Car::all();
+        return view("carlist", compact('car'));
     }
 //methode pour afficher la vue des catégories
     public function categorylist(){
@@ -93,6 +95,50 @@ class CarController extends Controller
     }
 //methode pour mettre à jour une catégorie
     public function editemodel(Request $request, $id){
+        $data = $request->all();
+        $request->validate([
+            "modele_name" => "required",
+            "annee" => "required",
+            "marque_id" => "required"
+        ]);
+        Modele::find($id)->update(
+            [
+                "modele_name" => $data["modele_name"],
+                "annee" => $data["annee"],
+                "brands_id" => $data["marque_id"]
+            ]
+        );
+        return redirect()->back()->with("updatecat", "Modèle modifiée !");
+    }
+
+    public function addcar(){
+        $model = Modele::all();
+        return view("addcar", compact('model'));
+    }
+
+    //methode pour ajouter une catégorie
+    public function savecar(Request $request){
+        $data = $request->all();
+        $request->validate([
+            "modele_name" => "required",
+            "annee" => "required",
+            "marque_id" => "required"
+        ]);
+
+        Modele::create([
+            "modele_name" => $data["modele_name"],
+            "annee" => $data["annee"],
+            "brands_id" => $data["marque_id"]
+        ]);
+        return redirect()->back()->with("message", "Modèle ajoutée !");
+    }
+//methode pour supprimer une catégorie
+    public function deletecar($id){
+        Modele::find($id)->delete();
+        return redirect()->back()->with("deletecat", "Modèle supprimée !");
+    }
+//methode pour mettre à jour une catégorie
+    public function editecar(Request $request, $id){
         $data = $request->all();
         $request->validate([
             "modele_name" => "required",
