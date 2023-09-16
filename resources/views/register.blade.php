@@ -48,6 +48,12 @@ Author URL: http://w3layouts.com
 							</div>
 						</div>
 						<div class="bottom-content">
+							@if (session("success"))
+								<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+									<strong style="color:rgb(39, 160, 9)"> {{ session("success") }} </strong> <br>
+									<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+								</div>
+                            @endif
 							<form action="{{ route('traitementRegister') }}" method="post">
                                 @csrf
 								<input type="text" name="lastname" class="input-form" placeholder="Your lastname"

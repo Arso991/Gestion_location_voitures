@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use App\Models\Car_category;
+use App\Models\Modele;
 use Illuminate\Http\Request;
 
 class CarController extends Controller
@@ -60,5 +61,51 @@ class CarController extends Controller
         $brands = Brand::all();
 
         return view("carmodel", compact("brands"));
+    }
+
+
+    //methode pour afficher la vue des catégories
+    public function modellist(){
+        $category = Brand::all();
+        $model = Modele::all();
+        return view("carmodel", compact("category", "model"));
+    }
+//methode pour ajouter une catégorie
+    public function model(Request $request){
+        $data = $request->all();
+        $request->validate([
+            "modele_name" => "required",
+            "annee" => "required",
+            "marque_id" => "required"
+        ]);
+
+        Modele::create([
+            "modele_name" => $data["modele_name"],
+            "annee" => $data["annee"],
+            "brands_id" => $data["marque_id"]
+        ]);
+        return redirect()->back()->with("message", "Modèle ajoutée !");
+    }
+//methode pour supprimer une catégorie
+    public function deletemodel($id){
+        Modele::find($id)->delete();
+        return redirect()->back()->with("deletecat", "Modèle supprimée !");
+    }
+//methode pour mettre à jour une catégorie
+    public function editemodel(Request $request, $id){
+        $data = $request->all();
+        $request->validate([
+            "modele_name" => "required",
+            "annee" => "required",
+            "marque_id" => "required"
+        ]);
+        Modele::find($id)->update(
+            [
+                "modele_name" => $data["modele_name"],
+                "annee" => $data["annee"],
+                "brands_id" => $data["marque_id"]
+            ]
+        );
+        return redirect()->back()->with("updatecat", "Modèle modifiée !");
     }
 }

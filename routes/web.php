@@ -15,12 +15,11 @@ use App\Http\Controllers\CarController;
 |
 */
 
-Route::get('/',[ClientController::class, "index"])->name("index");
 
 
 
 // Route pour afficher le formulaire d'inscription
-Route::get('/register',[UtilisateurController::class, "register"])->name("register");
+Route::get("/register",[UtilisateurController::class, "register"])->name("register");
 
 
 // Route pour traiter le formulaire d'inscription
@@ -73,4 +72,10 @@ Route::controller(CarController::class)->group(function(){
     Route::post("editcategory/{id}", "editecategory")->name("editeCategory");
     Route::get("brand", "brandlist")->name("brandList");
     Route::post("savebrand/store", "savebrand")->name("saveBrand");
+
+
+    Route::get("model", "modellist")->name("modelList");
+    Route::post("addmodel", "model")->name("addModel");
+    Route::get("trashmodel/{id}", "deletemodel")->name("trashModel");
+    Route::post("editmodel/{id}", "editemodel")->name("editeModel");
 });

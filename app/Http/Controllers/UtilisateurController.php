@@ -38,14 +38,16 @@ class UtilisateurController extends Controller
             // La connexion a réussi, connectez l'utilisateur manuellement
             Auth::login($utilisateur);
 
+            // Mettez l'utilisateur dans la session
+            $request->session()->put('utilisateur', $utilisateur);
+
             // Redirigez où vous le souhaitez
             return redirect('/');
         }
 
-        // La connexion a échoué
-        return redirect()->back()->withInput($request->only('email', 'remember'));
+        // La connexion a échoué, renvoyez un message d'erreur personnalisé
+        return redirect()->back()->withInput($request->only('email', 'remember'))->with('error', 'Adresse e-mail ou mot de passe incorrect.');
     }
-
 
     public function traitementRegister(Request $request) 
     {
@@ -99,11 +101,13 @@ class UtilisateurController extends Controller
         return redirect()->route('login')->with('success', "Compte activé avec succès!");
     }
 
-    public function emailForgot(){
+    public function emailForgot()
+    {
         return view('emailForgot');
     }
 
-    public function emailVerify(Request $request){
+    public function emailVerify(Request $request)
+    {
         $request->validate([
             'email' => array(
                 'required',
@@ -134,7 +138,8 @@ class UtilisateurController extends Controller
         }
     }
 
-    public function emailChange(Request $request){
+    public function emailChange(Request $request)
+    {
         $email = $request->query('email');
         $Utilisateur = Utilisateur::where('email',$email)->first();
         if(!$Utilisateur){
@@ -150,7 +155,8 @@ class UtilisateurController extends Controller
 
     }
 
-    public function change_password(Request $request){
+    public function change_password(Request $request)
+    {
         $Utilisateur =Utilisateur::where('email',$request->email)->first();
         $request->validate([
             'nouvpassword'=>
@@ -163,5 +169,14 @@ class UtilisateurController extends Controller
             ]);
             return redirect()->route('login')->with('message',"Mot de passe Réinialisé avec success");
 
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout(); // Déconnecte l'utilisateur actuel
+        $request->session()->invalidate(); // Invalide la session
+        $request->session()->regenerateToken(); // Régénère le jeton CSRF
+
+        return redirect('/login'); // Redirige l'utilisateur vers la page d'accueil ou une autre page de votre choix après la déconnexion.
     }
 }

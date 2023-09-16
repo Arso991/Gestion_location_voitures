@@ -4,7 +4,8 @@
 <div class="container text-center mt-4">
     <a href="{{ route("categoryList") }}" class="btn btn-dark">Ajouter une catégorie</a>
     <a href="{{ route("brandList") }}" class="btn btn-dark me-3 ms-3">Ajouter une marque</a>
-    <a href="" class="btn btn-dark">Ajouter un modèle</a>
+    <a href="{{ route("modelList") }}" class="btn btn-dark">Ajouter un modèle</a>
+    <a href="{{ route("modelList") }}" class="btn btn-dark">Ajouter une voiture</a>
 </div>
 @endsection
 @section("fieldtitle", "Liste des voitures disponible !")

@@ -47,10 +47,21 @@ Author URL: http://w3layouts.com
 							</div>
 						</div>
 						<div class="bottom-content">
+							@if (session("error"))
+								<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+									<strong style="color:red"> {{ session("error") }} </strong> <br>
+									<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+								</div>
+                            @endif
+							@if (session("success"))
+								<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+									<strong style="color:rgb(39, 160, 9)"> {{ session("success") }} </strong> <br>
+									<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+								</div>
+                            @endif
 							<form action="{{ route('traitementLogin') }}" method="post">
                                 @csrf
-								<input type="email" name="email" class="input-form" placeholder="Your Email"
-										required="required" />
+								<input type="email" name="email" class="input-form" placeholder="Your Email" required="required" />
 								<input type="password" name="password" class="input-form"
 										placeholder="Your Password" required="required" />
 								<button type="submit" class="loginhny-btn btn">Login</button>

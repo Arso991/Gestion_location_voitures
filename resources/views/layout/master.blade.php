@@ -20,10 +20,16 @@
                 <div>
                     <a class="navbar-brand text-white bold" href="{{route('index')}}">GesCar</a>
                 </div>
-                <form class="d-flex">
 
-                    <a href="" class="btn btn-danger me-3">Deconnexion</a>
-                </form>
+                @if(session('utilisateur'))
+                    <p style="font-size: 18px;color:white;">Bienvenue, {{ session('utilisateur')->email }}</p>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-sm btn-danger m-5">Déconnexion</button>
+                    </form>
+                @else
+                    <p>Non connecté</p>
+                @endif
             </div>
 
         </nav>
