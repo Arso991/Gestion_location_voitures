@@ -13,16 +13,16 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>@yield("title")</title>
 </head>
-<body style="background-color: rgb(102, 102, 102)">
-    <header>
+<body style="background-color: rgb(102, 102, 102)  " >
+    <header >
         <nav class="navbar bg-dark">
-            <div class="container-fluid">
+            <div class="container-fluid " >
                 <div>
-                    <a class="navbar-brand text-white bold" href="{{route('index')}}">GesCar</a>
+                    <a class="navbar-brand text-white bold" href="{{route('index')}}"><img style="height:80px"  src="images/logo.png" alt=""></a>
                 </div>
 
                 @if(session('utilisateur'))
-                    <p style="font-size: 18px;color:white;">Bienvenue, {{ session('utilisateur')->email }}</p>
+                    <p style="font-size: 18px;color:white;">Bienvenue, <img class="bg-info" src="images/user.png" alt="">{{ session('utilisateur')->email }}</p>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit" class="btn btn-sm btn-danger m-5">Déconnexion</button>

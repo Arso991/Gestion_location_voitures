@@ -56,14 +56,14 @@ Author URL: http://w3layouts.com
                             @endif
 							<form action="{{ route('traitementRegister') }}" method="post">
                                 @csrf
-								<input type="text" name="lastname" class="input-form" placeholder="Your lastname"
+								<input type="text" name="lastname" class="input-form" placeholder="Votre nom"
 										required="required" />
-                                <input type="text" name="firstname" class="input-form" placeholder="Your firstname"
+                                <input type="text" name="firstname" class="input-form" placeholder="Votre prénom"
 										required="required" />
-                                <input type="email" name="email" class="input-form" placeholder="Your Email"
+                                <input type="email" name="email" class="input-form" placeholder="Votre email"
 										required="required" />
 								<input type="password" name="password" class="input-form"
-										placeholder="Your Password" required="required" />
+										placeholder="Votre mot de passe" required="required" />
 								<button type="submit" class="loginhny-btn btn">S'inscrire</button>
 							</form>
 							<p>Vous avez un compte <a href="{{ route('login') }}">Connectez-vous!</a></p>

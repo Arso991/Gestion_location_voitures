@@ -16,40 +16,40 @@
             <div class="col-md-6">
                 <div class="car_field mb-4 box-shadow">
                     <div class="car_field_img">
-                        <img src="{{ asset("img/jeep4.jpg") }}" alt="">
+                        <img src="{{ asset($item["image_principale"]) }}" alt="">
                     </div>
                     <div class="car_field_right">
-                        <h5 class="car_field_right_title text-white">TOYOTA</h5>
+                        <h5 class="car_field_right_title text-white">{{ $item->nom_voiture }}</h5>
                         <div class="car_field_right_text">
                             <div class="car_field_right_text_left">
                                 <div class="car_field_right_text_left_item">
                                     <span  style="width: 6rem">Catégorie</span> 
                                     <span  style="width: 1rem">:</span> 
-                                    <span class="text-capitalize">Tucson</span>
+                                    <span class="text-capitalize">{{$item->modele->brand->category->name}}</span>
                                 </div>
                                 <div class="car_field_right_text_left_item">
                                     <span  style="width: 6rem">Marque</span> 
                                     <span  style="width: 1rem">:</span> 
-                                    <span class="text-capitalize">Almiron</span>
+                                    <span class="text-capitalize">{{$item->modele->brand->marque_name}}</span>
                                 </div>
                                 <div class="car_field_right_text_left_item">
                                     <span  style="width: 6rem">Modèle</span> 
                                     <span  style="width: 1rem">:</span> 
-                                    <span class="text-capitalize">Diesel</span>
+                                    <span class="text-capitalize">{{$item->modele->modele_name}}</span>
                                 </div>
                                 <div class="car_field_right_text_left_item">
                                     <span  style="width: 6rem">Année</span> 
                                     <span  style="width: 1rem">:</span> 
-                                    <span class="text-capitalize">2023</span>
+                                    <span class="text-capitalize">{{$item->modele->annee}}</span>
                                 </div>
                             </div>
                             <div class="car_field_right_text_right">
                                 <div class="car_field_right_text_left_item">
                                     <span  style="width: 6rem">Couleur</span> 
                                     <span  style="width: 1rem">:</span> 
-                                    <span class="text-capitalize">Rouge</span>
+                                    <span class="text-capitalize">{{$item->couleur}}</span>
                                 </div>
-                                <button class="btn btn-sm btn-warning text-white text-uppercase">Voir plus</button>
+                                <a class="btn btn-sm btn-warning text-white text-uppercase" href="{{ route('showOneCar', ["id" => $item->id]) }}">Voir plus</a>
                             </div>
                         </div>
                     </div>

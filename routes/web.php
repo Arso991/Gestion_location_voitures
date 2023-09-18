@@ -81,6 +81,12 @@ Route::controller(CarController::class)->group(function(){
 
     Route::get("addcar", "addcar")->name("addCar");
     Route::post("savecar", "savecar")->name("savecar");
-    Route::get("trashcar/{id}", "deletecar")->name("trashCar");
-    Route::post("editcar/{id}", "editecar")->name("editeCar");
+    Route::get("showOneCar/{id}", "showOneCar")->name("showOneCar");
+
+
+    Route::get("location", "locationlist")->name("locationlist");
+    Route::get("addlocation", "addlocation")->name("addlocation");
+    Route::post("savelocation", "savelocation")->name("savelocation");
+    Route::get("editlocation/{id}", "editlocation")->name("editlocation");
+    Route::post("updatelocation/store/{id}", "updatelocation")->name("updatelocation");
 });

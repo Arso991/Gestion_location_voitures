@@ -21,13 +21,13 @@ return new class extends Migration
             $table->integer("nbre_cylindre");
             $table->integer("soupape");
             $table->integer("vitesse_max");
-            $table->integer("carosserie");
-            $table->integer("transmission");
+            $table->string("carosserie");
+            $table->string("transmission");
             $table->string("frein");
             $table->integer("acceleration");
             $table->string("image_principale");
-            $table->string("image_3");
-            $table->string("image_2");
+            $table->string("image_3")->nullable();
+            $table->string("image_2")->nullable();
             $table->string("couleur");
             $table->foreignId("modele_id")->constrained("modele")->onUpdate("cascade")->onDelete("cascade");
             $table->timestamps();

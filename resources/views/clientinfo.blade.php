@@ -7,7 +7,7 @@
 @endif
 
 @section("content")
-<div class="d-flex justify-content-center align-items-center">
+<div class="d-flex justify-content-center align-items-center" >
     @if (isset($id))
     <form style="width: 40rem" method="POST" action="{{ route("updateClient", ["id"=>$clientX->id]) }}" enctype="multipart/form-data">
         @csrf

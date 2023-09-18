@@ -61,9 +61,9 @@ Author URL: http://w3layouts.com
                             @endif
 							<form action="{{ route('traitementLogin') }}" method="post">
                                 @csrf
-								<input type="email" name="email" class="input-form" placeholder="Your Email" required="required" />
+								<input type="email" name="email" class="input-form" placeholder="Votre email" required="required" />
 								<input type="password" name="password" class="input-form"
-										placeholder="Your Password" required="required" />
+										placeholder="Votre mot de passe" required="required" />
 								<button type="submit" class="loginhny-btn btn">Login</button>
 							</form>
 							<p>Vous n'êtes pas inscrit ? <a href="{{ route('register') }}">Rejoignez-nous !</a></p>
