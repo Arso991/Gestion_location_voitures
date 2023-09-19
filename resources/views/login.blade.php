@@ -73,7 +73,7 @@ Author URL: http://w3layouts.com
 					</div>
 				</div>
 				<div class="w3l-copy-right text-center">
-					<p>© 2023 Gestion de voitures. Tous droits réservés
+					<p>© 2023 Gestion de voitures.Auteur GNANHOUNGBE Arsène et HOUANGNI yakid
 						<a href="#" target="_blank"></a></p>
 				</div>
 			</div>

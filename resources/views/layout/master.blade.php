@@ -15,18 +15,20 @@
 </head>
 <body style="background-color: rgb(102, 102, 102)  " >
     <header >
-        <nav class="navbar bg-dark">
-            <div class="container-fluid " >
+        <nav class="navbar  " style="background-color: black "  >
+            <div class="container-fluid my-"  >
                 <div>
-                    <a class="navbar-brand text-white bold" href="{{route('index')}}"><img style="height:80px"  src="images/logo.png" alt=""></a>
+                    <a class="navbar-brand text-white bold" href="{{route('index')}}"><img style="height:70px"   src="images/logo.png" alt=""></a>
                 </div>
 
                 @if(session('utilisateur'))
-                    <p style="font-size: 18px;color:white;">Bienvenue, <img class="bg-info" src="images/user.png" alt="">{{ session('utilisateur')->email }}</p>
-                    <form action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-sm btn-danger m-5">Déconnexion</button>
-                    </form>
+                    <div class="d-grid gap-4 d-flex  justify-content-center ">
+                        <p style="font-size: 18px;color:white;" class="mt-5">Bienvenue,<img class="bg-info" src="images/user.png" alt=""> {{ session('utilisateur')->email }}</p>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-sm btn-danger m-5">Déconnexion</button>
+                        </form>
+                    </div>
                 @else
                     <p>Non connecté</p>
                 @endif
@@ -55,4 +57,8 @@
         closeOnSelect: false,  
     } );
 </script>
+<div class="w3l-copy-right text-center">
+    <p>© 2023 Gestion de voitures.Auteur GNANHOUNGBE Arsène et HOUANGNI yakid
+       <a href="#" target="_blank"></a></p>
+</div>
 </body>

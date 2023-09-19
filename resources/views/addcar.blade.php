@@ -133,5 +133,7 @@
 
         <button style="width: 100%" class="btn btn-warning mt-3 " type="submit">Enregistrer</button>
     </form>
+
 </div>
+
 @endsection
